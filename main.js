@@ -63,3 +63,4 @@ boton2.addEventListener("click", cargarProducto)
 
 let boton3 = document.getElementById("btnMostrar")
 boton3.addEventListener("click", mostrarProductos)
+
