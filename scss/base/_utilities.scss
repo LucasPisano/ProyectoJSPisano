@@ -1,0 +1,4 @@
+@mixin texto($font,$text){
+    font-size: $font;
+    text-align: $text;
+}

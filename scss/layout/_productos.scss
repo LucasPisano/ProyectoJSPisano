@@ -1,0 +1,66 @@
+/*productos*/
+.menu {
+  .texto-productos {
+    text-align: center;
+    font-size: 5rem;
+    padding-bottom: 2rem;
+  }
+  .botones-productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: inline-block;
+    button {
+      flex: unset;
+    }
+  }
+}
+
+
+  .productos {
+   
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .producto {
+      flex: 0 0 calc(33.3% - 1rem);
+      border: 1px solid #e1e1e1;
+      padding: 2rem;
+      border-radius: 5px;
+      background-color: $blanco;
+      h2 {
+        text-align: center;
+        padding-top: 10px;
+      }
+      p {
+        font-size: 1.8rem;
+      }
+      &:hover  {
+        transform:translateY(-3px) scale(1.05);
+        box-shadow: 0 5px 5px 0px $oscuro;
+        filter: none;
+      }
+      .precio {
+        display: flex;
+        justify-content: space-between;
+        p {
+          font-weight: bold;
+          font-size: 2rem;
+        }
+        button {
+          padding: 1rem;
+          border-radius: 5px;
+          border: none;
+          background-color: $azul;
+          color: $blanco;
+          height: 3.8rem;
+        }
+        
+      }
+      img {
+        max-width: 100%;
+        height: 70%;
+      }
+    }
+  }
+

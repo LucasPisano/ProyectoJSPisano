@@ -1,66 +1,254 @@
+const shopContent = document.getElementById("shopContent");
 
-const Producto = function(nombre, precio, stock){
-    this.nombre=nombre
-    this.precio=precio
-    this.stock=stock
+const productos = [{
+    id: 1,
+    nombre: "libretas",
+    precio:1150,
+    img:"assets/img/with-cups.jpeg",
+},
+{
+    id: 2,
+    nombre: "Stroopwafels",
+    precio:900,
+    img:"assets/img/stroop.jpeg",
+},
+{
+    id: 3,
+    nombre: "Mini stroopwafels",
+    precio:750,
+    img:"assets/img/box-mini.jpeg",
+},
+{
+    id: 4,
+    nombre: "Caja stroopwafels Decoradas",
+    precio:900,
+    img:"assets/img/speculaas.jpeg",
+},{
+    id: 5,
+    nombre: "Stroopkoeken",
+    precio:750,
+    img:"assets/img/stroopkoeken.jpeg",
+},{
+    id: 6,
+    nombre: "Speculaas",
+    precio:900,
+    img:"assets/img/speculaas.jpeg",
+},];
+
+let carrito = [];
+//Variable que mantiene el estado visible del carrito
+var carritoVisible = false;
+
+//Espermos que todos los elementos de la pàgina cargen para ejecutar el script
+if(document.readyState == 'loading'){
+    document.addEventListener('DOMContentLoaded', ready)
+}else{
+    ready();
 }
 
-let producto1= new Producto("stroopwafels", 1500, 50)
-let producto2= new Producto("tazas", 8000, 5)
-let producto3= new Producto("stroopcoeken", 1000, 50)
-
-let array = [producto1,producto2,producto3]
-
-function buscar(){
-    let articulo = prompt("ingrese el nombre")
-    let Filtro = array.filter( (producto)=> producto.nombre.includes(articulo))
-
-    if(Filtro.length > 0){
-        console.table(Filtro)
-    }else{
-        alert("no hay conicidencias con " + articulo)
+function ready(){
+    
+    // eliminar del carrito
+    var botonesEliminarItem = document.getElementsByClassName('btn-eliminar');
+    for(var i=0;i<botonesEliminarItem.length; i++){
+        var button = botonesEliminarItem[i];
+        button.addEventListener('click',eliminarItemCarrito);
     }
-}
 
-function cargarProducto(){
-    let nombre =prompt(" ingresa el nombre")
-    let precio =prompt(" ingresa el precio")
-    let stock =parseInt(prompt(" ingresa el stock"))
-
-    if(isNaN(precio) || isNaN(stock) || nombre=== null){
-        alert("ingresa datos validos")
-        return
+    // sumar cantidad
+    var botonesSumarCantidad = document.getElementsByClassName('sumar-cantidad');
+    for(var i=0;i<botonesSumarCantidad.length; i++){
+        var button = botonesSumarCantidad[i];
+        button.addEventListener('click',sumarCantidad);
     }
-    let producto= new Producto(nombre,precio,stock)
 
-    array.push(producto)
-    console.table(lista)
+     // restar cantidad
+    var botonesRestarCantidad = document.getElementsByClassName('restar-cantidad');
+    for(var i=0;i<botonesRestarCantidad.length; i++){
+        var button = botonesRestarCantidad[i];
+        button.addEventListener('click',restarCantidad);
+    }
+
+    // Agregar al carrito
+    var botonesAgregarAlCarrito = document.getElementsByClassName('boton-item');
+    for(var i=0; i<botonesAgregarAlCarrito.length;i++){
+        var button = botonesAgregarAlCarrito[i];
+        button.addEventListener('click', agregarAlCarritoClicked);
+    }
+
+    //botón comprar
+    document.getElementsByClassName('btn-pagar')[0].addEventListener('click',pagarClicked)
+}
+//Eliminar todos los elementos del carrito 
+function pagarClicked(){
+    alert("Gracias por la compra");
+    //Elimino todos los elmentos del carrito
+    var carritoItems = document.getElementsByClassName('carrito-items')[0];
+    while (carritoItems.hasChildNodes()){
+        carritoItems.removeChild(carritoItems.firstChild)
+    }
+    actualizarTotalCarrito();
+    ocultarCarrito();
+}
+//Funciòn que controla el boton clickeado de agregar al carrito
+function agregarAlCarritoClicked(event){
+    var button = event.target;
+    var item = button.parentElement;
+    var titulo = item.getElementsByClassName('titulo-item')[0].innerText;
+    var precio = item.getElementsByClassName('precio-item')[0].innerText;
+    var imagenSrc = item.getElementsByClassName('img-item')[0].src;
+    console.log(imagenSrc);
+
+    agregarItemAlCarrito(titulo, precio, imagenSrc);
+
+    hacerVisibleCarrito();
+
 }
 
-function mostrarProductos(){
-        const ulElement = document.createElement('ul');
-      
+//Funcion que hace visible el carrito
+function hacerVisibleCarrito(){
+    carritoVisible = true;
+    var carrito = document.getElementsByClassName('carrito')[0];
+    carrito.style.marginRight = '0';
+    carrito.style.opacity = '1';
+
+    var items =document.getElementsByClassName('contenedor-items')[0];
+    items.style.width = '60%';
+}
+
+//Funciòn que agrega un item al carrito
+function agregarItemAlCarrito(titulo, precio, imagenSrc){
+    var item = document.createElement('div');
+    item.classList.add = ('item');
+    var itemsCarrito = document.getElementsByClassName('carrito-items')[0];
   
-        array.forEach(producto => {
-          const liElement = document.createElement('li');
-          liElement.textContent = producto.nombre;
-          ulElement.appendChild(liElement);
-        });
-        muestra.innerHTML = '';
-      
-        muestra.appendChild(ulElement);
-      
+    //controlamos que el item que intenta ingresar no se encuentre en el carrito
+    var nombresItemsCarrito = itemsCarrito.getElementsByClassName('carrito-item-titulo');
+    for(var i=0;i < nombresItemsCarrito.length;i++){
+        if(nombresItemsCarrito[i].innerText==titulo){
+            alert("El item ya se encuentra en el carrito");
+            return;
+        }
+    }
+
+    var itemCarritoContenido = `
+        <div class="carrito-item">
+            <img src="${imagenSrc}" width="80px" alt="">
+            <div class="carrito-item-detalles">
+                <span class="carrito-item-titulo">${titulo}</span>
+                <div class="selector-cantidad">
+                    <i class="fa-solid fa-minus restar-cantidad"></i>
+                    <input type="text" value="1" class="carrito-item-cantidad" disabled>
+                    <i class="fa-solid fa-plus sumar-cantidad"></i>
+                </div>
+                <span class="carrito-item-precio">${precio}</span>
+            </div>
+            <button class="btn-eliminar">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    `
+    item.innerHTML = itemCarritoContenido;
+    itemsCarrito.append(item);
+
+    //Agregamos la funcionalidad eliminar al nuevo item
+     item.getElementsByClassName('btn-eliminar')[0].addEventListener('click', eliminarItemCarrito);
+
+    //Agregmos al funcionalidad restar cantidad del nuevo item
+    var botonRestarCantidad = item.getElementsByClassName('restar-cantidad')[0];
+    botonRestarCantidad.addEventListener('click',restarCantidad);
+
+    //Agregamos la funcionalidad sumar cantidad del nuevo item
+    var botonSumarCantidad = item.getElementsByClassName('sumar-cantidad')[0];
+    botonSumarCantidad.addEventListener('click',sumarCantidad);
+
+    //Actualizamos total
+    actualizarTotalCarrito();
+}
+//Aumento en uno la cantidad del elemento seleccionado
+
+
+function sumarCantidad(event){
+    var buttonClicked = event.target;
+    var selector = buttonClicked.parentElement;
+    console.log(selector.getElementsByClassName('carrito-item-cantidad')[0].value);
+    var cantidadActual = selector.getElementsByClassName('carrito-item-cantidad')[0].value;
+    cantidadActual++;
+    selector.getElementsByClassName('carrito-item-cantidad')[0].value = cantidadActual;
+    actualizarTotalCarrito();
+}
+//Resto en uno la cantidad del elemento seleccionado
+function restarCantidad(event){
+    var buttonClicked = event.target;
+    var selector = buttonClicked.parentElement;
+    console.log(selector.getElementsByClassName('carrito-item-cantidad')[0].value);
+    var cantidadActual = selector.getElementsByClassName('carrito-item-cantidad')[0].value;
+    cantidadActual--;
+    if(cantidadActual>=1){
+        selector.getElementsByClassName('carrito-item-cantidad')[0].value = cantidadActual;
+        actualizarTotalCarrito();
+    }
 }
 
-const mostrarBtn = document.getElementById('mostrarBtn');
-const mostrar = document.getElementById('mostrar');
+//Elimino el item seleccionado del carrito
+function eliminarItemCarrito(event){
+    var buttonClicked = event.target;
+    buttonClicked.parentElement.parentElement.remove();
+    //Actualizamos el total del carrito
+    actualizarTotalCarrito();
 
-let boton = document.getElementById("btnBuscar")
-boton.addEventListener("click", buscar)
+    //la siguiente funciòn controla si hay elementos en el carrito
+    //Si no hay elimino el carrito
+    ocultarCarrito();
+}
+//Funciòn que controla si hay elementos en el carrito. Si no hay oculto el carrito.
+function ocultarCarrito(){
+    var carritoItems = document.getElementsByClassName('carrito-items')[0];
+    if(carritoItems.childElementCount==0){
+        var carrito = document.getElementsByClassName('carrito')[0];
+        carrito.style.marginRight = '-100%';
+        carrito.style.opacity = '0';
+        carritoVisible = false;
+    
+        var items =document.getElementsByClassName('contenedor-items')[0];
+        items.style.width = '100%';
+    }
+}
+//Actualizamos el total de Carrito
+function actualizarTotalCarrito(){
+    //seleccionamos el contenedor carrito
+    var carritoContenedor = document.getElementsByClassName('carrito')[0];
+    var carritoItems = carritoContenedor.getElementsByClassName('carrito-item');
+    var total = 0;
+    //recorremos cada elemento del carrito para actualizar el total
+    carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    for(var i=0; i< carritoItems.length;i++){
+        var item = carritoItems[i];
+       
+        var precioElemento = item.getElementsByClassName('carrito-item-precio')[0];
+        var imagenSrc = item.getElementsByTagName('img')[0].src;
+        var titulo = item.getElementsByClassName('carrito-item-titulo')[0];
+        //quitamos el simobolo peso y el punto de milesimos.
+        var precio = parseFloat(precioElemento.innerText.replace('$','').replace('.',''));
+        var cantidadItem = item.getElementsByClassName('carrito-item-cantidad')[0];
+        console.log(precio);
+        var cantidad = cantidadItem.value;
+        total = total + (precio * cantidad);
+        carrito.push({
+            titulo:titulo,
+            precio:precio,
+            imagen:imagenSrc,
+            cantidad:cantidad
+        });
+    }
+    total = Math.round(total * 100)/100;
 
-let boton2 = document.getElementById("btnCargar")
-boton2.addEventListener("click", cargarProducto)
+    document.getElementsByClassName('carrito-precio-total')[0].innerText = '$'+total.toLocaleString("es") + ",00";
+    savelocal();
+}
 
-let boton3 = document.getElementById("btnMostrar")
-boton3.addEventListener("click", mostrarProductos)
+const savelocal =() =>{
+    localStorage.setItem("carrito",JSON.stringify(carrito))
+}
+
 

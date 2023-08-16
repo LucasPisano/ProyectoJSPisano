@@ -1,0 +1,11 @@
+{
+  "name": "proyecto",
+  "version": "1.0.0",
+  "description": "```bash Se agrego bootstrap en el navbar y se agregó en el index una galeria tipo carrusel con 3 imagenes, luego configure la seccion de productos para que sea responsive. ``` ```bash Aun quedan las demas secciones pero no estan terminadas al 100%. ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,83 @@
+.pie-pagina {
+  margin-top: 3rem;
+  background-color: rgb(20, 20, 20);
+  padding: 3rem;
+  .contenedor-piepagina {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .info {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      flex-direction: column;
+      h3,
+      p {
+        color: $blanco;
+        text-align: center;
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        font-size: 2.2rem;
+      }
+
+      .redes-sociales {
+        display: flex;
+   
+        align-items:center ;
+        justify-content: center;
+        ul{
+          &:hover a{
+            filter: blur(2px);
+          }
+          li{
+          display: inline-block;
+          margin: 0 5px;
+          width: 50px;
+          height: 50px;
+          text-align: center;
+          
+          a{
+            display: block;
+            padding: 0 10px;
+            background: $oscuro;
+            color: $blanco;
+            line-height: 50px;
+            font-size: 18px;
+            box-shadow: 0 3px 5px 0px $oscuro;
+            transition: .2s;
+            &:hover  {
+              transform:translateY(-3px) scale(1.05);
+              box-shadow: 0 5px 5px 0px $oscuro;
+              filter: none;
+            }
+            
+          }
+         
+        }
+      }
+      
+      
+      }
+    }
+  }
+}
+.footer {
+  text-align: center;
+  background-color: $oscuro;
+  color: $blanco;
+  padding: 2rem;
+  font-size: 2rem;
+}
+
+.redes-sociales ul li a:hover{
+  
+    transform:translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 5px 0px $oscuro;
+    filter: none;
+  
+  
+}
