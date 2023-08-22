@@ -8,10 +8,10 @@
      /*position: sticky !important;*/
     top: 0;
     transition: .3s;
-    /* Estilos para ocultar */
+    /* Estilos para ocultar 
     margin-right: -100%;
     
-    opacity: 0;
+    opacity: 0;*/
 }
 .carrito .header-carrito{
     background-color: #000;

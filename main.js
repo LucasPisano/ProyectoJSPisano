@@ -48,6 +48,9 @@ if(document.readyState == 'loading'){
 
 function ready(){
     
+    JSON.parse(localStorage.getItem("carrito"))
+
+
     // eliminar del carrito
     var botonesEliminarItem = document.getElementsByClassName('btn-eliminar');
     for(var i=0;i<botonesEliminarItem.length; i++){
@@ -88,6 +91,7 @@ function pagarClicked(){
         carritoItems.removeChild(carritoItems.firstChild)
     }
     actualizarTotalCarrito();
+    savelocal();
     ocultarCarrito();
 }
 //Funciòn que controla el boton clickeado de agregar al carrito
@@ -102,6 +106,7 @@ function agregarAlCarritoClicked(event){
     agregarItemAlCarrito(titulo, precio, imagenSrc);
 
     hacerVisibleCarrito();
+    savelocal();
 
 }
 
@@ -130,7 +135,7 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc){
             return;
         }
     }
-
+   
     var itemCarritoContenido = `
         <div class="carrito-item">
             <img src="${imagenSrc}" width="80px" alt="">
@@ -164,6 +169,7 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc){
 
     //Actualizamos total
     actualizarTotalCarrito();
+    savelocal();
 }
 //Aumento en uno la cantidad del elemento seleccionado
 
@@ -176,6 +182,7 @@ function sumarCantidad(event){
     cantidadActual++;
     selector.getElementsByClassName('carrito-item-cantidad')[0].value = cantidadActual;
     actualizarTotalCarrito();
+    savelocal();
 }
 //Resto en uno la cantidad del elemento seleccionado
 function restarCantidad(event){
@@ -187,6 +194,7 @@ function restarCantidad(event){
     if(cantidadActual>=1){
         selector.getElementsByClassName('carrito-item-cantidad')[0].value = cantidadActual;
         actualizarTotalCarrito();
+        savelocal();
     }
 }
 
@@ -202,9 +210,10 @@ function eliminarItemCarrito(event){
     ocultarCarrito();
 }
 //Funciòn que controla si hay elementos en el carrito. Si no hay oculto el carrito.
-function ocultarCarrito(){
+/*function ocultarCarrito(){
     var carritoItems = document.getElementsByClassName('carrito-items')[0];
-    if(carritoItems.childElementCount==0){
+    carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    if(carrito == 0){
         var carrito = document.getElementsByClassName('carrito')[0];
         carrito.style.marginRight = '-100%';
         carrito.style.opacity = '0';
@@ -213,7 +222,7 @@ function ocultarCarrito(){
         var items =document.getElementsByClassName('contenedor-items')[0];
         items.style.width = '100%';
     }
-}
+}*/
 //Actualizamos el total de Carrito
 function actualizarTotalCarrito(){
     //seleccionamos el contenedor carrito
@@ -222,8 +231,9 @@ function actualizarTotalCarrito(){
     var total = 0;
     //recorremos cada elemento del carrito para actualizar el total
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    for(var i=0; i< carritoItems.length;i++){
-        var item = carritoItems[i];
+
+    for(var i=0; i< carrito.length;i++){
+        var item = carrito[i];
        
         var precioElemento = item.getElementsByClassName('carrito-item-precio')[0];
         var imagenSrc = item.getElementsByTagName('img')[0].src;
