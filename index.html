@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <title>Stroopwafles NL</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script
       src="https://kit.fontawesome.com/283335a286.js"
       crossorigin="anonymous"
@@ -178,8 +179,16 @@
         <a href="pages/productos.html" class="btn btn-rojo">Pedí ahora</a>
       </div>
     </div>
-
-    <div id="shopContent" class="shop-content"></div>
+    <!-- carrito-->
+    <div class="btn-carrito">
+    <label for=""  id="verCarrito">🛒</label >
+    </div>
+        <div id="modal-container" class="carrito">
+          
+        </div>
+  
+  
+ 
     <!--chef-->
     <section class="chef contenedor">
       <div class="texto-nosotros">
@@ -200,105 +209,14 @@
 
             
       <h2 class="texto-productos">Algunos de nuestros productos</h2>
-      <div class="botones-productos">
-        <button class="todos btn btn-rojo">Todos</button>
-        <button class="Stroopwafels btn btn-rojo">Stroopwafels</button>
-        <button class="Speculaas btn btn-rojo">Speculaas</button>
-        <button class="Extras btn btn-rojo">Extras</button>
-      </div>
-              <!-- Carrito de Compras -->
-              <div class="carrito" id="carrito">
-                <div class="header-carrito">
-                    <h2>Tu Carrito</h2>
-                </div>
     
-                <div class="carrito-items">
-                    
-                </div>
-                <div class="carrito-total">
-                    <div class="fila">
-                        <strong>Tu Total</strong>
-                        <span class="carrito-precio-total">
-                            $0,00
-                        </span>
-                    </div>
-                    <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>
-                </div>
-            </div>
-      <div class="productos">
+           
+<!--productos-->
+      <div  id="shopContent" class="productos">
        
-        <div class="producto">
-          <img src="assets/img/book1.jpeg" alt="" class="img-item" />
-          <span class="titulo-item">Libretas</span>
-          <p>24 hojas. <br>Libretas de tapa blanda y disponibles en hojas lisas o rayadas.</p>
-          
-          <p><span class="precio-item">$1.150</span></p>
-                <button class=" boton-item ">Comprar<i class="fas fa-shopping-basket"></i></button>
-              
-        
-        </div>
-        <div class="producto">
-          <img src="assets/img/stroop.jpeg" alt="" class="img-item"/>
-          <span class="titulo-item">Stroopwafels</span>
-          <p>paquete de 8 unidades <br>
-            Disponibles en los sabores: <br>
-            Caramelo (Tradiccional),
-            Miel,
-            Dulce de Leche y 
-            Nutella
-            </p>
-          
-            <p><span class="precio-item">$1.150</span></p>
-            <button class=" boton-item ">Comprar<i class="fas fa-shopping-basket"></i></button>
-          
-        </div>
-        <div class="producto">
-          <img src="assets/img/box-mini.jpeg" alt="" class="img-item"/>
-          <span class="titulo-item">Mini stroopwafels</span>
-          <p>Paquete de 10 mini stroopwafels <br>
-            Disponibles en los sabores: <br>
-            Caramelo (Tradiccional),
-            Miel,
-            Dulce de Leche y 
-            Nutella</p>
-         
-            <p><span class="precio-item">$750,00</span></p>
-            <button class=" boton-item ">Comprar<i class="fas fa-shopping-basket"></i></button>
-          
-        </div>
-        <div class="producto">
-          <img src="assets/img/with-cups.jpeg" alt="" />
-          <h2>Caja stroopwafels Decoradas</h2>
-          <p>Vos elegis el relleno, el chocolate y el topping. <br>
-            Podes hacer cualquier combinacion con cada Stroopwafel.</p>
-       
-            <p><span class="precio-item">$1.650,00</span></p>
-            <button class=" boton-item ">Comprar<i class="fas fa-shopping-basket"></i></button>
-       
-        </div>
-        <div class="producto">
-          <img src="assets/img/speculaas.jpeg" alt="" />
-          <h2>Speculaas</h2>
-          <p>Deliciosas galletitas crocantes que contienen diferentes especias que hacen el sabor tan particular.</p>
-       
-            <p><span class="precio-item">$900,00</span></p>
-            <button class=" boton-item ">Comprar<i class="fas fa-shopping-basket"></i></button>
-        
-        </div>
-        <div class="producto">
-          <img src="assets/img/stroopkoeken.jpeg" alt="" />
-          <h2>Stroopkoeken</h2>
-          <p>Una Galletita crocante relleno con Caramelo tradicional.</p>
-        
-            <p><span class="precio-item">$750,00</span></p>
-            <button class=" boton-item ">Comprar<i class="fas fa-shopping-basket"></i></button>
-          
-        </div>
       </div>
-      
-    </section>
 
-       
+    </section>  
     <!--pie de  pagina-->
     <div class="pie-pagina">
       <div class="contenedor-piepagina contenedor">
@@ -335,11 +253,14 @@
         desarrollado por Lucas Pisano
       </p>
     </footer>
+   
+    <script src="main.js"></script>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous"
     ></script>
-    <script src="main.js"></script>
+    
   </body>
 </html>
