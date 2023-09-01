@@ -1,0 +1,40 @@
+ [{
+    "id": 1,
+    "nombre": "libretas",
+    "precio": 1150,
+   "img": "assets/img/with-cups.jpeg",
+    "cantidad": 1
+},
+{
+    "id": 2,
+    "nombre": "Stroopwafels",
+    "precio": 900,
+    "img": "assets/img/stroop.jpeg",
+    "cantidad": 1
+},
+{
+    "id": 3,
+    "nombre": "Mini stroopwafels",
+    "precio": 750,
+    "img": "assets/img/box-mini.jpeg",
+    "cantidad": 1
+},
+{
+    "id": 4,
+    "nombre": "Caja stroopwafels Decoradas",
+    "precio": 900,
+    "img": "assets/img/speculaas.jpeg",
+    "cantidad": 1
+}, {
+    "id": 5,
+    "nombre": "Stroopkoeken",
+    "precio": 750,
+    "img": "assets/img/stroopkoeken.jpeg",
+    "cantidad": 1
+}, {
+    "id": 6,
+    "nombre": "Speculaas",
+    "precio": 900,
+    "img": "assets/img/speculaas.jpeg",
+    "cantidad": 1
+}]

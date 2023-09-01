@@ -177,10 +177,7 @@
     
   display: none;
     top: 10%;
-    /* font-size: 16px; */
-    /* text-transform: uppercase; */
-    /* font-weight: bold; */
-    /* color: #ffffff; */
+    
     border-radius: 5px;
     letter-spacing: 2px; 
     background-color: #e9471e;
@@ -196,4 +193,7 @@
     border-color: none;
     z-index: 98;
 
+}
+.delete-product{
+cursor: pointer;
 }
