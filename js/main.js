@@ -1,7 +1,7 @@
 const shopContent = document.getElementById("shopContent");
 const verCarrito = document.getElementById("verCarrito");
 const modalContainer = document.getElementById("modal-container");
-const Swal = require('sweetalert2');
+
 
 
 
@@ -10,6 +10,7 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const getProductos = async () => {
     const response = await fetch("data.json");
     const data = await response.json();
+    console.log(data);
     data.forEach((product) => {
         let content = document.createElement("div");
         content.className = "producto";
